@@ -7,8 +7,13 @@ import Box from './components/Box';
 
 function App() {
 
+  // The formValues variable is the storage of the submitted form
   const [ formValues, setFormValues ] = useState({});
 
+  /**
+   * List of Questions, you can get the list of questions from the Database and store it in this variable
+   * Make sure that you populate the id, type, name, from the Database
+   */
   const formContent = [
     {
       id: '1',
@@ -47,13 +52,23 @@ function App() {
     },
   ];  
 
+  // Function that executes when the user submits the form
   const submitForm = (e, inputFields) => {
+
+    // Prevents the load of the window.
     e.preventDefault();
+
+    // setting the formValues variable
     setFormValues(inputFields);
     console.log(inputFields);
   }
 
-  // Copy and paste this to have another set of section buttons, just make sure to change the variable name
+  /**
+   * This variable is the content of the pop-up window.
+   * You may change the title, and the body property.
+   * Always set the show property to false as it is the indicator that the current section is the one that is displaying in the pop-up.
+   * You can duplicate this variable as long as you change the duplicate one into a different variable name.
+   */
   const sections = [
     {
       id: 0,
@@ -84,9 +99,16 @@ function App() {
     },
   ];
 
+  // Indicates what section is currently displaying in the pop-up
   const [ currentSection, setCurrentSection ] = useState(sections[0]);
+
+  // Toggle pop-up window
   const [ showPopUp, setshowPopUp ] = useState(false);
 
+  /**
+   * Function that displays the pop-up window and display the current section in the pop-up body
+   * This function will execute when the button was clicked.
+   */
   const showSection = (obj) => {
     setshowPopUp(!showPopUp);
     setCurrentSection(obj);
