@@ -73,7 +73,6 @@ function Form({formContent, onSubmit}) {
                 <div key={el.id} className="form-control" style={ formControlStyle }>
                     <label style={ formLabelStyle }>{ el.displayName }</label>
                     {
-                        {/** If the field is correct, it'll display the entered value instead of the text field */}
                         (el.isCorrect ? el.value :  (
                             <Input type={el.type} name={el.name.toLowerCase().replace(' ', '-')} onChange={ (e) => onFormChange(i, e) } wrongAnswer={el.wrongAnswer}/>))
                     }
