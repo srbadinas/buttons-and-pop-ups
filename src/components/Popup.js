@@ -29,7 +29,7 @@ const popupStyle = {
 
 const popupDialogStyle = {
     width: '600px',
-    height: '400px',
+    minHeight: '400px',
     margin: '5rem auto',
     borderRadius: '3px',
     background: '#fff'

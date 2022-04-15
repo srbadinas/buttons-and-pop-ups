@@ -15,7 +15,10 @@ function Box({sections, showSection}) {
 const containerStyle = {
     display: "flex",
     border: "1px dashed #000",
-    width: "600px",
+    width: "45%",
+    height: "350px",
+    marginRight: '1rem',
+    marginBottom: '1rem'
 }
 
 const buttonContainerStyle = {

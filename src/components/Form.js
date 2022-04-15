@@ -9,8 +9,13 @@ function Form({formContent, onSubmit}) {
         formContent.map((el, i) => {
             return {
                 id: i,
+                displayName: el.name,
                 name: el.name.toLowerCase().replace(' ', '-'),
                 value: '',
+                correctAnswer: el.correctAnswer,
+                isCorrect: false,
+                wrongAnswer: false,
+                attempts: 0,
             };
         })
     );
@@ -21,19 +26,33 @@ function Form({formContent, onSubmit}) {
         setInputFields(data);
     }
 
+    const onAnswerSubmit = (i) => {
+        let data = [...inputFields];
+        if (data[i]['correctAnswer'].toLowerCase() === data[i]['value'].toLowerCase()) {
+            data[i]['isCorrect'] = true;
+        } else {
+            data[i]['attempts']++;
+            data[i]['wrongAnswer'] = true;
+        };
+        setInputFields(data);
+    }
+
   return (
     <form onSubmit={(e) => onSubmit(e, inputFields) }>
-        { formContent.map((el, i) => {
+        { inputFields.map((el, i) => {
             return (
                 <div key={el.id} className="form-control" style={ formControlStyle }>
-                    <label style={ formLabelStyle }>{ el.name }</label>
+                    <label style={ formLabelStyle }>{ el.displayName }</label>
                     {
-                        (<Input type={el.type} name={el.name.toLowerCase().replace(' ', '-')} onChange={(e) => onFormChange(i, e) } />) 
+                        (el.isCorrect ? el.value :  (
+                            <Input type={el.type} name={el.name.toLowerCase().replace(' ', '-')} onChange={ (e) => onFormChange(i, e) } wrongAnswer={el.wrongAnswer}/>))
                     }
+                    <Button text="Submit" type="button" style={{ marginLeft: '.5rem', display: (el.isCorrect && 'none') }} onClick={ (e) => onAnswerSubmit(i) }/>
+                    <span style={{marginLeft: '1rem'}}>Attempt(s): {el.attempts}</span>
                 </div>
             );
         }) }
-        <Button text="Submit" type="submit"/>
+        <Button text="Submit Form" type="submit"/>
     </form>
   )
 }
@@ -45,6 +64,4 @@ const formControlStyle = {
 const formLabelStyle = {
     display: 'block'
 }
-const formTextFieldStyle = {}
-
 export default Form

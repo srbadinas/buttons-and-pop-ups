@@ -14,19 +14,38 @@ function App() {
       id: '1',
       type: 'text',
       name: 'Question 1',
+      correctAnswer: 'red',
+      isCorrect: false,
     },
     {
       id: '2',
-      element: 'input',
       type: 'text',
       name: 'Question 2',
+      correctAnswer: 'blue',
+      isCorrect: false,
     },
     {
       id: '3',
       type: 'text',
       name: 'Question 3',
+      correctAnswer: 'yellow',
+      isCorrect: false,
     },
-  ];
+    {
+      id: '4',
+      type: 'text',
+      name: 'Question 4',
+      correctAnswer: 'pink',
+      isCorrect: false,
+    },
+    {
+      id: '5',
+      type: 'text',
+      name: 'Question 5',
+      correctAnswer: 'green',
+      isCorrect: false,
+    },
+  ];  
 
   const submitForm = (e, inputFields) => {
     e.preventDefault();
@@ -39,12 +58,27 @@ function App() {
     {
       id: 0,
       title: 'Section 1',
-      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      body: <Form formContent={formContent} onSubmit={submitForm}/>,
       show: false,
     },
     {
       id: 1,
       title: 'Section 2',
+      body: <Form formContent={formContent} onSubmit={submitForm}/>,
+      show: false,
+    },
+  ];
+
+  const sections2 = [
+    {
+      id: 0,
+      title: 'Section 3',
+      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      show: false,
+    },
+    {
+      id: 1,
+      title: 'Section 4',
       body: <Form formContent={formContent} onSubmit={submitForm}/>,
       show: false,
     },
@@ -62,9 +96,8 @@ function App() {
     <div className="App" style={appContainerStyle}>
 
       <Box sections={sections} showSection={showSection}/>
-      <Box sections={sections} showSection={showSection}/>
-      <Box sections={sections} showSection={showSection}/>
-      <Box sections={sections} showSection={showSection}/>
+      <Box sections={sections2} showSection={showSection}/>
+      <Box sections={sections2} showSection={showSection}/>
 
       <Popup show={showPopUp} content={currentSection} onToggle={showSection}/>
     </div>
@@ -75,7 +108,7 @@ const appContainerStyle = {
   margin: "2rem auto",
   padding: "5rem",
   display: "flex",
-  justifyContent: "space-around"
+  flexWrap: "wrap",
 }
 
 export default App;
