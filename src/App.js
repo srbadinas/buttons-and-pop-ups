@@ -69,38 +69,90 @@ function App() {
    * Always set the show property to false as it is the indicator that the current section is the one that is displaying in the pop-up.
    * You can duplicate this variable as long as you change the duplicate one into a different variable name.
    */
-  const sections = [
+  const modules = [
     {
       id: 0,
       title: 'Section 1',
-      body: <Form formContent={formContent} onSubmit={submitForm}/>,
-      show: false,
+      questions: [
+        {
+          id: 0,
+          statement: "Question 1",
+          answer: "1"
+        },
+        {
+          id: 1,
+          statement: "Question 2",
+          answer: "2"
+        },
+        {
+          id: 2,
+          statement: "Question 3", 
+          answer: "3"
+        },
+        {
+          id: 3,
+          statement: "Question 4", 
+          answer: "4"
+        },
+        {
+          id: 4,
+          statement: "Question 4", 
+          answer: "4"
+        },
+        {
+          id: 5,
+          statement: "Question 5", 
+          answer: "5"
+        },
+        {
+          id: 6,
+          statement: "Question 6", 
+          answer: "6"
+        },
+        {
+          id: 7,
+          statement: "Question 7", 
+          answer: "7"
+        },
+        {
+          id: 8,
+          statement: "Question 8", 
+          answer: "8"
+        },
+        {
+          id: 9,
+          statement: "Question 9", 
+          answer: "9"
+        },
+      ],
+      summary: "This is Section 1",
     },
     {
       id: 1,
       title: 'Section 2',
-      body: <Form formContent={formContent} onSubmit={submitForm}/>,
-      show: false,
-    },
-  ];
-
-  const sections2 = [
-    {
-      id: 0,
-      title: 'Section 3',
-      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      show: false,
-    },
-    {
-      id: 1,
-      title: 'Section 4',
-      body: <Form formContent={formContent} onSubmit={submitForm}/>,
-      show: false,
+      questions: [
+        {
+          id: 0,
+          statement: "Question 4",
+          answer: "4"
+        },
+        {
+          id: 1,
+          statement: "Question 5",
+          answer: "5"
+        },
+        {
+          id: 2,
+          statement: "Question 6", 
+          answer: "6"
+        },
+      ],
+      summary: "This is Section 2",
     },
   ];
 
   // Indicates what section is currently displaying in the pop-up
-  const [ currentSection, setCurrentSection ] = useState(sections[0]);
+  const [ currentSection, setCurrentSection ] = useState(modules[0]);
 
   // Toggle pop-up window
   const [ showPopUp, setshowPopUp ] = useState(false);
@@ -116,12 +168,7 @@ function App() {
 
   return (
     <div className="App" style={appContainerStyle}>
-
-      <Box sections={sections} showSection={showSection}/>
-      <Box sections={sections2} showSection={showSection}/>
-      <Box sections={sections2} showSection={showSection}/>
-
-      <Popup show={showPopUp} content={currentSection} onToggle={showSection}/>
+      <Box sections={modules}/>
     </div>
   );
 }

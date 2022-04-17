@@ -5,20 +5,21 @@ import Button from './Button';
 
 function Form({formContent, onSubmit}) {
 
+
     // Stores the fields into a component-level state variable that comes from the formContent in the App.js
     const [ inputFields, setInputFields ] = useState(
         formContent.map((el, i) => {
             return {
                 id: i,
-                displayName: el.name,
-                name: el.name.toLowerCase().replace(' ', '-'),
+                displayName: el.statement,
+                name: el.statement.toLowerCase().replace(' ', '-'),
                 value: '',
-                correctAnswer: el.correctAnswer,
+                correctAnswer: el.answer,
                 isCorrect: false,
                 wrongAnswer: false,
                 attempts: 0,
             };
-        })
+        })  
     );
 
     /**
