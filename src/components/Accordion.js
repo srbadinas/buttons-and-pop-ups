@@ -4,10 +4,13 @@ import Form from "./Form"
 function Accordion({ header, body, show }) {
 
   return (
-    <div className="accordion-container" style={{...accordionContainerStyle, display: (!show && "")}}>
+    <div className="accordion-container" style={{...accordionContainerStyle, display: (show ? "block" : "none")}}>
         <div className="accordion-header" style={accordionHeaderStyle}>{header}</div>
         <div className="accordion-body">
-            <Form formContent={body.questions}/>
+          {
+            (body.type === "form" ? <Form formContent={ body.content.questions }/> : (body.content.summary))
+          }
+            
         </div>
     </div>
   )

@@ -1,41 +1,49 @@
 import { useEffect, useState } from 'react';
 import Accordion from './Accordion';
 import Button from './Button';
+import Popup from './Popup';
 
 function Box({sections}) {
 
   const [ currentSection, setCurrentSection ] = useState();
 
   const [ showAccordion, setShowAccordion ] = useState(false);
+  const [ accordionBodyType, setaccordionBodyType ] = useState("");
 
-  const toggleAccordion = (section) => {
-    setCurrentSection(section);
-    setShowAccordion(true);
+  const [ showPopUp, setShowPopUp ] = useState(false);
+  const [ popUpBodyType, setPopUpBodyType ] = useState("");
+
+  const toggleAccordion = (content, type) => {
+    setCurrentSection(content);
+    setaccordionBodyType(type);
+    setShowAccordion(!showAccordion);
+  }
+
+  const togglePopUp = (content, type) => {
+    setCurrentSection(content);
+    setPopUpBodyType(type);
+    setShowPopUp(!showPopUp);
+  }
+
+  const onToggle = (e) => {
+    setShowPopUp(!showPopUp);
   }
 
   return (
-    <div className='container' style={containerStyle}>
+    <div className='box-container'>
+        <div className="buttonContainer" style={buttonContainerStyle}>
+          <Button object={sections.questions} text="Section 1" type="button" onClick={() => togglePopUp(sections, "form")} style={{marginBottom: '1rem'}}/>
+          <Button object={sections.summary} text="Section 2" type="button" onClick={() => togglePopUp(sections, "summary")} />
+        </div>
+
         {
           (currentSection && (
-           <Accordion key={currentSection.id} header={currentSection.title} body={{questions: currentSection.questions, summary: currentSection.summary}} show={showAccordion}/>
+            <Popup key={currentSection.id} show={showPopUp} header={sections.title} body={{ content: currentSection, type: popUpBodyType }} onToggle={(e) => onToggle()}/>
           ))
         }
-        <div className="buttonContainer" style={buttonContainerStyle}>
-            { sections.map((section, i) => {
-            return (<Button key={section.id} object={section} text={section.title} type="button" onClick={() => toggleAccordion(section)} style={{ marginBottom: ( (sections.length - 1) !== i && '1rem') }}/>)
-            }) }
-        </div>
+
     </div>
   )
-}
-
-const containerStyle = {
-    display: "flex",
-    border: "1px dashed #000",
-    width: "45%",
-    height: "350px",
-    marginRight: '1rem',
-    marginBottom: '1rem'
 }
 
 const buttonContainerStyle = {

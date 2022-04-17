@@ -1,14 +1,19 @@
-function Popup({show, content, onToggle}) {
+import Form from "./Form"
+
+function Popup({show, header, body, onToggle}) {
+    console.log(body.type)
   return (
-    <div className="pop-up" style={{...popupStyle, display: (show ? 'block' : 'none') }}>
-        <div className="pop-up-dialog" style={popupDialogStyle}>
+    <div className="pop-up" style={{ display: (show ? 'block' : 'none') }}>
+        <div className="pop-up-dialog">
             <div className="pop-up-content" style={{height: '100%'}}>
                 <div className="pop-up-header" style={popUpHeaderStyle}>
-                    <h3>{content.title}</h3>
-                    <h3 style={closeButtonStyle} onClick={() => onToggle(content)}>x</h3>
+                    <h3>{header}</h3>
+                    <h3 style={closeButtonStyle} onClick={() => onToggle()}>x</h3>
                 </div>
                 <div className="pop-up-body" style={popUpBodyStyle}>
-                    {content.body}
+                    {
+                        (body.type === "form" ? <Form formContent={ body.content.questions }/> : (body.content.summary))
+                    }
                 </div>
                 <div className="pop-up-footer">
                 </div>
@@ -16,23 +21,6 @@ function Popup({show, content, onToggle}) {
         </div>
     </div>
   )
-}
-
-const popupStyle = {
-    width: '100%',
-    height: '100vh',
-    position: 'fixed',
-    top: '0',
-    left: '0',
-    background: 'rgba(000, 000, 000, .3)',
-}
-
-const popupDialogStyle = {
-    width: '600px',
-    minHeight: '400px',
-    margin: '5rem auto',
-    borderRadius: '3px',
-    background: '#fff'
 }
 
 const popUpHeaderStyle = { 
